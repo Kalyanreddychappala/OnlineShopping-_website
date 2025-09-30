@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  shopping_cart:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shopping_cart
+    container_name: shopping_cart
+    ports:
+      - "9093:9093"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka

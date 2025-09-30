@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  Register:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: registration
+    container_name: registration
+    ports:
+      - "9090:9090"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka

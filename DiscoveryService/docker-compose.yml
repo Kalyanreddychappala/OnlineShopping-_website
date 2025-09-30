@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  discovery-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: discovery_service
+    container_name: discovery_service
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka

@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  Apigw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: apigw
+    container_name: apigw
+    ports:
+    - "8080:8080"
+    environment:
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka

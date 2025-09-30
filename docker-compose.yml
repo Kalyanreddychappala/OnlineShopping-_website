@@ -1,0 +1,102 @@
+version: '3.5'
+
+services:
+  discovery-service:
+    build:
+      context: ./DiscoveryService/
+    image: discovery-service
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - cloudnetwork
+
+  user-registration:
+    build:
+      context: ./Registration/
+    image: user-registration
+    container_name: user-registration
+    ports:
+      - "9090:9090"
+    networks:
+      - cloudnetwork
+    depends_on:
+      - discovery-service
+
+  user-login:
+    build:
+      context: ./LoginService/
+    image: user-login
+    container_name: user-login
+    ports:
+      - "9091:9091"
+    networks:
+      - cloudnetwork
+    depends_on:
+      - discovery-service
+
+  apigw:
+    build:
+      context: ./Apigw/
+    image: user-apigw
+    container_name: user-apigw
+    ports:
+      - "8080:8080"
+    networks:
+      - cloudnetwork
+    depends_on:
+      - discovery-service
+
+  productService:
+    build:
+      context: ./ProductService/
+    image: product-service
+    container_name: product-service
+    ports:
+      - "9092:9092"
+    networks:
+      - cloudnetwork
+    depends_on:
+      - discovery-service
+
+  cartService:
+    build:
+      context: ./Shopping_Cart_Service/
+    image: cart-service
+    container_name: cart-service
+    ports:
+      - "9093:9093"
+    networks:
+      - cloudnetwork
+    depends_on:
+      - discovery-service
+
+  orderService:
+    build:
+      context: ./OrderService/
+    image: order_service
+    container_name: order_service
+    ports:
+      - "9094:9094"
+    networks:
+      - cloudnetwork
+    depends_on:
+      - discovery-service
+
+  paymentService:
+    build:
+      context: ./PaymentService/
+    image: payment_service
+    container_name: payment_service
+    ports: 
+      - "9095:9095"
+    networks:
+      - cloudnetwork
+    depends_on:
+      - discovery-service
+
+networks:
+  cloudnetwork:
+
+
+    
